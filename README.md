@@ -1,11 +1,8 @@
-Hitchhiker's Guide to React Router v4.0
-
-React Boilerplate 04: Part IV of the Guide
+React Boiler Plate 04:
 
 1.  Create React App
 2.  React Router v4.0
 3.  Folder Structure aligned for Views + Components
-4.  Recursive paths
-5.  Route Configuration Array
+4.  Route config array
 
---evedes, Sep 2018
+--evedes, Aug 2018

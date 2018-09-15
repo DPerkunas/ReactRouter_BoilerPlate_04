@@ -1,22 +1,58 @@
 import React from 'react';
 import { Home } from './views/Home';
 import { About } from './views/About';
-import { TopicList } from './views/TopicList';
 import { NoMatch } from './views/NoMatch';
+import { TopicList } from './views/TopicList';
+import { TopicDetail } from './components/TopicDetail';
 import { NavBar } from './components/NavBar';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { MakeRouteWithSubRoutes } from './makeRouteWithSubRoutes';
+import { Switch } from 'react-router-dom';
 
-export const Routes = () => {
+const fetchXYZApiRoutes = () => {
+  return [
+    {
+      path: "/HelloWorld",
+      component: "AAA",
+    }
+  ]
+}
+
+const routes = [
+  {
+    path: "/Home",
+    component: Home
+  },
+  {
+    path: "/About",
+    component: About
+  },
+  {
+    path: "/Topics",
+    component: TopicList,
+    routes: [
+      {
+        path: "/Topics/:topicId",
+        component: TopicDetail,
+        routes: fetchXYZApiRoutes,
+      },
+    ]
+  },
+  {
+    path: "/:WhereTheHeckIsThat",
+    component: NoMatch,
+  }
+];
+
+export const Routes = (props) => {
   return (
     <div>
       <NavBar />
       <Switch>
-        <Route exact path="/"><Redirect to="/Home" /></Route>
-        <Route exact path="/Home" component={Home} />
-        <Route exact path="/About" component={About} />
-        <Route exact path="/Topics" component={TopicList} />
-        <Route path="/Topics/:topicId" component={TopicList} />
-        <Route component={NoMatch} />
+        {
+          routes.map(
+            (route, index) => <MakeRouteWithSubRoutes key={index} {...route} />
+          )
+        }
       </Switch>
     </div>
   );
